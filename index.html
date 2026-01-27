@@ -1,0 +1,693 @@
+import React, { useState } from 'react';
+import { Brain, Zap, Database, Sparkles, Users, Chrome, Calendar, Camera, FileText, Image, Video, MessageSquare, ChevronRight, Menu, X, CheckCircle2, BookOpen, Rocket, Target, ArrowRight } from 'lucide-react';
+
+export default function WithcomAI() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedModule, setSelectedModule] = useState(null);
+  const [activeTab, setActiveTab] = useState('all');
+
+  const modules = [
+    { 
+      id: 1, 
+      title: "모든 기기의 완벽한 동기화", 
+      icon: Zap, 
+      color: "bg-blue-500",
+      description: "PC, 모바일, 태블릿 간의 데이터를 끊김 없이 연동하여 언제 어디서든 동일한 환경에서 작업할 수 있는 기반을 마련합니다.",
+      topics: ["Google 계정 통일하기", "Chrome을 기본 브라우저로 지정", "주소록/캘린더의 기본 저장 계정 설정", "PC에서 Google 메시지 연동 실습"]
+    },
+    { 
+      id: 2, 
+      title: "브라우저를 최강의 도구로", 
+      icon: Chrome, 
+      color: "bg-purple-500",
+      description: "필수 Chrome 확장 프로그램을 설치하여 웹서핑, 정보 수집, 번역, 보안 등 업무 효율을 극대화합니다.",
+      topics: ["URL 관리: Bitly, Firelinks", "정보 수집: GoFullPage, Dragfree", "생산성: DeepL, LastPass, Adblock", "AI 연동: Maxai.me"]
+    },
+    { 
+      id: 3, 
+      title: "흩어진 일정과 할 일 관리", 
+      icon: Calendar, 
+      color: "bg-green-500",
+      description: "Google 캘린더와 Tasks를 연동하여 개인의 모든 일정과 할 일을 하나의 시스템에서 체계적으로 관리하고 공유합니다.",
+      topics: ["캘린더를 동료에게 특정 권한으로 공유", "PC와 모바일에서 Tasks로 할 일 추가", "스마트폰 위젯 설정", "PC에서 전체화면 Tasks 앱 사용"]
+    },
+    { 
+      id: 4, 
+      title: "구글 생태계 심화 활용", 
+      icon: Camera, 
+      color: "bg-yellow-500",
+      description: "Google 포토와 지도를 활용하여 촬영한 사진과 이동 기록을 검색 가능한 데이터베이스로 만들고, 업무와 일상에 활용합니다.",
+      topics: ["Google Photos: 얼굴/사물 인식 검색", "특정 인물, 날짜 기준 앨범 생성", "Google Maps: 타임라인 확인", "다음 출장/여행지를 지도에 저장"]
+    },
+    { 
+      id: 5, 
+      title: "Notion 기초", 
+      icon: FileText, 
+      color: "bg-pink-500",
+      description: "Notion의 기본 블록(Block) 개념을 이해하고, 텍스트, 이미지, 링크, 할 일 목록 등을 구조화하여 나만의 노트를 작성합니다.",
+      topics: ["새 페이지 생성 후 아이콘과 커버 이미지 변경", "다양한 블록 사용 실습", "유튜브 영상 링크를 임베드하여 페이지 내에서 재생", "ChatGPT 생성 자료를 Notion 페이지로 옮기기"]
+    },
+    { 
+      id: 6, 
+      title: "Notion 데이터베이스", 
+      icon: Database, 
+      color: "bg-indigo-500",
+      description: "Notion 데이터베이스를 생성하고, 다양한 보기(보드, 캘린더, 갤러리)를 활용하여 프로젝트, 업무 일지, 고객 정보를 체계적으로 관리합니다.",
+      topics: ["업무 일지 데이터베이스 생성", "상태 속성 기준 보드 보기 생성", "기존 Excel 목록을 CSV 파일로 변환하여 DB로 가져오기", "Copy To Notion 확장 프로그램으로 스크랩"]
+    },
+    { 
+      id: 7, 
+      title: "OneNote 활용", 
+      icon: BookOpen, 
+      color: "bg-orange-500",
+      description: "OneNote의 전자 필기장 구조를 이해하고, PDF, 오피스 파일 등 다양한 형식의 문서를 첨부하고 필기하며 강력한 디지털 자료실을 구축합니다.",
+      topics: ["2024년 프로젝트 전자 필기장 생성", "강의 자료 PDF 파일을 인쇄 형태로 삽입 후 펜으로 필기", "모든 필기장이 OneDrive에 자동 저장/동기화", "특정 페이지를 동료에게 공유하여 검토 및 피드백 받기"]
+    },
+    { 
+      id: 8, 
+      title: "AI 콘텐츠 제작", 
+      icon: Image, 
+      color: "bg-teal-500",
+      description: "생성형 AI 도구를 활용하여 기획안을 바탕으로 발표자료(PPT) 초안을 만들고, 홍보에 필요한 이미지를 손쉽게 제작합니다.",
+      topics: ["Gamma: 스마트워크 도입 사내 제안서 5장짜리 발표자료 자동 생성", "Ideogram.ai: Smart Work 로고와 이미지 생성", "Microsoft Designer: AI를 활용한 업무 혁신 세미나 홍보 포스터 제작"]
+    },
+    { 
+      id: 9, 
+      title: "AI 멀티미디어", 
+      icon: Video, 
+      color: "bg-red-500",
+      description: "AI 도구를 활용하여 간단한 CM송을 작곡하고, 텍스트나 이미지를 기반으로 짧은 홍보 영상을 제작합니다.",
+      topics: ["Suno: 우리 회사 파이팅! CM송 작곡 (1분짜리 회사 로고송)", "Vrew: 영상 파일을 업로드하여 AI로 자동 자막 생성 및 편집", "Kling AI: 커피를 마시며 코딩하는 개발자 텍스트로 5초 영상 생성"]
+    },
+    { 
+      id: 10, 
+      title: "나만의 AI 비서", 
+      icon: MessageSquare, 
+      color: "bg-cyan-500",
+      description: "ChatGPT(GPTs)와 Gemini(GEMs), NotebookLM을 활용하여 반복적인 질문에 답하는 상담 챗봇, 회의록을 정리하는 업무 봇 등 나만의 맞춤형 AI를 만듭니다.",
+      topics: ["ChatGPT GPTs 만들기 접속", "우리 회사 신입사원을 위한 자주 묻는 질문(FAQ) 답변 봇 만들기", "Gemini GEM 만들기에서 동일한 미션 수행"]
+    },
+    { 
+      id: 11, 
+      title: "실전 프로젝트", 
+      icon: Rocket, 
+      color: "bg-violet-500",
+      description: "앞서 배운 모든 도구와 AI를 총동원하여 신제품 런칭이라는 가상의 과제에 대한 통합 마케팅 기획안을 완성합니다.",
+      topics: ["아이디어션 (ChatGPT)", "브랜딩 (Ideogram)", "발표자료 (Gamma)", "홍보 콘텐츠 (Microsoft Designer, Suno)", "정리 및 공유 (Notion)"]
+    }
+  ];
+
+  const coreAreas = [
+    {
+      icon: Zap,
+      title: "동기화",
+      description: "모든 기기, 하나의 구글 계정",
+      color: "text-blue-500"
+    },
+    {
+      icon: Brain,
+      title: "자동화",
+      description: "브라우저 확장 프로그램과 AI",
+      color: "text-purple-500"
+    },
+    {
+      icon: Database,
+      title: "데이터베이스화",
+      description: "Notion과 Google 포토/지도",
+      color: "text-green-500"
+    },
+    {
+      icon: Sparkles,
+      title: "창조",
+      description: "AI를 활용한 문서, 이미지, 영상, 음악 제작",
+      color: "text-pink-500"
+    },
+    {
+      icon: Users,
+      title: "개인화",
+      description: "나만의 맞춤형 AI 비서 (GPTs, Gems, NotebookLM)",
+      color: "text-orange-500"
+    }
+  ];
+
+  const aiTools = [
+    { category: "생성형 AI", tools: ["ChatGPT", "Claude", "Gemini", "Perplexity"], icon: Brain },
+    { category: "이미지 생성", tools: ["DALL-E", "Ideogram", "Gamma", "Microsoft Designer"], icon: Image },
+    { category: "영상/음악", tools: ["Suno", "Vrew", "Kling", "Gen3"], icon: Video },
+    { category: "업무 도구", tools: ["Notion", "Google Workspace", "OneNote", "Obsidian"], icon: FileText },
+    { category: "3D 생성", tools: ["Tripo", "Meshy", "Spline"], icon: Target },
+    { category: "코딩 도구", tools: ["Replit", "Bolt.new", "V0", "Codev"], icon: Chrome }
+  ];
+
+  // 갤러리 데이터
+  const galleryItems = [
+    { id: 1, title: "스마트워크 워크숍", image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600", link: "#" },
+    { id: 2, title: "스마트워크 세미나", image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600", link: "#" },
+    { id: 3, title: "경영전략 회의", image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=600", link: "#" },
+    { id: 4, title: "AI 활용 실습", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600", link: "#" },
+    { id: 5, title: "글로벌 네트워킹", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600", link: "#" }
+  ];
+
+  // 스크롤 함수
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setMobileMenuOpen(false);
+  };
+
+  // 모듈 선택 함수
+  const handleModuleClick = (module) => {
+    setSelectedModule(module);
+  };
+
+  // 모달 닫기
+  const closeModal = () => {
+    setSelectedModule(null);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Navigation */}
+      <nav className="bg-white shadow-md fixed w-full top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
+              <img src="/mnt/user-data/uploads/WITHCOM_AI_LOGO.png" alt="WITHCOM AI" className="h-10" />
+            </div>
+            
+            {/* Desktop Menu */}
+            <div className="hidden md:flex space-x-8">
+              <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-blue-600 transition">소개</button>
+              <button onClick={() => scrollToSection('modules')} className="text-gray-700 hover:text-blue-600 transition">학습 과정</button>
+              <button onClick={() => scrollToSection('tools')} className="text-gray-700 hover:text-blue-600 transition">AI 도구</button>
+              <button onClick={() => scrollToSection('gallery')} className="text-gray-700 hover:text-blue-600 transition">갤러리</button>
+              <button onClick={() => scrollToSection('community')} className="text-gray-700 hover:text-blue-600 transition">커뮤니티</button>
+            </div>
+
+            <button 
+              onClick={() => scrollToSection('community')}
+              className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+              지금 시작하기
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t">
+            <div className="px-4 py-3 space-y-3">
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left text-gray-700 hover:text-blue-600">소개</button>
+              <button onClick={() => scrollToSection('modules')} className="block w-full text-left text-gray-700 hover:text-blue-600">학습 과정</button>
+              <button onClick={() => scrollToSection('tools')} className="block w-full text-left text-gray-700 hover:text-blue-600">AI 도구</button>
+              <button onClick={() => scrollToSection('gallery')} className="block w-full text-left text-gray-700 hover:text-blue-600">갤러리</button>
+              <button onClick={() => scrollToSection('community')} className="block w-full text-left text-gray-700 hover:text-blue-600">커뮤니티</button>
+              <button 
+                onClick={() => scrollToSection('community')}
+                className="w-full bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+              >
+                지금 시작하기
+              </button>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="hero" className="pt-24 pb-16 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            스마트 워크 & 생성형 AI
+            <br />
+            실무 마스터 과정
+          </h1>
+          <p className="text-xl md:text-2xl text-blue-100 mb-8">
+            AI 스마트 혁신 2026, 당신의 업무를 재창조하는 실습 가이드
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onClick={() => scrollToSection('community')}
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg"
+            >
+              시작하기
+            </button>
+            <button 
+              onClick={() => scrollToSection('about')}
+              className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition"
+            >
+              자세히 알아보기
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Before/After Section */}
+      <section id="about" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            모든 것이 연결되고, AI가 조력자가 되는 시대
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Before */}
+            <div className="bg-gray-100 rounded-xl p-8 border-2 border-gray-300">
+              <h3 className="text-2xl font-bold text-gray-700 mb-4">문제점</h3>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3"></div>
+                  <p className="text-gray-600">흩어진 정보, 반복적인 수작업</p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3"></div>
+                  <p className="text-gray-600">비효율적인 소통, 아이디어 고갈</p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3"></div>
+                  <p className="text-gray-600">비효율적 소통, 아이디어 고갈</p>
+                </div>
+              </div>
+            </div>
+
+            {/* After */}
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 border-2 border-blue-300">
+              <h3 className="text-2xl font-bold text-blue-600 mb-4">해결책</h3>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 mt-1 mr-3 flex-shrink-0" />
+                  <p className="text-gray-700">자동화된 워크플로우, 데이터 기반 의사결정</p>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 mt-1 mr-3 flex-shrink-0" />
+                  <p className="text-gray-700">창의적인 콘텐츠 생성, 개인화된 AI 비서</p>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 mt-1 mr-3 flex-shrink-0" />
+                  <p className="text-gray-700">창의적인 콘텐츠 생성, 개인화된 AI 비서</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Areas */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            핵심 학습 영역
+          </h2>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {coreAreas.map((area, index) => (
+              <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+                <area.icon className={`w-12 h-12 ${area.color} mb-4`} />
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{area.title}</h3>
+                <p className="text-gray-600 text-sm">{area.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Modules Roadmap */}
+      <section id="modules" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+            학습 로드맵
+          </h2>
+          <p className="text-center text-gray-600 mb-12">11개 모듈로 구성된 체계적인 커리큘럼</p>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {modules.map((module, index) => {
+              const Icon = module.icon;
+              return (
+                <div 
+                  key={module.id} 
+                  onClick={() => handleModuleClick(module)}
+                  className="bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-blue-400 transition cursor-pointer group"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`${module.color} w-12 h-12 rounded-lg flex items-center justify-center`}>
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-sm font-semibold text-gray-400">모듈 {module.id}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition">
+                    {module.title}
+                  </h3>
+                  <div className="flex items-center text-blue-600 text-sm font-semibold">
+                    자세히 보기 <ChevronRight className="w-4 h-4 ml-1" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Module Detail Modal */}
+      {selectedModule && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={closeModal}>
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
+              <div className="flex items-center">
+                <div className={`${selectedModule.color} w-10 h-10 rounded-lg flex items-center justify-center mr-3`}>
+                  {React.createElement(selectedModule.icon, { className: "w-5 h-5 text-white" })}
+                </div>
+                <div>
+                  <span className="text-sm text-gray-500">모듈 {selectedModule.id}</span>
+                  <h3 className="text-xl font-bold text-gray-900">{selectedModule.title}</h3>
+                </div>
+              </div>
+              <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="p-6">
+              <div className="mb-6">
+                <h4 className="text-lg font-bold text-gray-900 mb-3">학습 목표</h4>
+                <p className="text-gray-700 leading-relaxed">{selectedModule.description}</p>
+              </div>
+              
+              <div className="mb-6">
+                <h4 className="text-lg font-bold text-gray-900 mb-3">실습 과제</h4>
+                <ul className="space-y-3">
+                  {selectedModule.topics.map((topic, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle2 className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700">{topic}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="bg-orange-50 border-l-4 border-orange-400 p-4 rounded">
+                <div className="flex items-start">
+                  <Sparkles className="w-5 h-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h5 className="font-bold text-orange-800 mb-1">Pro-Tip</h5>
+                    <p className="text-sm text-orange-700">
+                      이 모듈을 학습한 후에는 실제 업무에 바로 적용해보세요. 이론만으로는 충분하지 않습니다. 
+                      직접 사용하고 피드백을 받으며 개선하는 것이 가장 효과적인 학습 방법입니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-6 flex gap-3">
+                <button 
+                  onClick={closeModal}
+                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                >
+                  학습 시작하기
+                </button>
+                <button 
+                  onClick={closeModal}
+                  className="px-6 border-2 border-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-50 transition"
+                >
+                  닫기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* AI Tools Preview */}
+      <section id="tools" className="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+            AI 도구 가이드
+          </h2>
+          <p className="text-center text-gray-600 mb-8">100+ AI 도구의 활용법을 배우세요</p>
+          
+          {/* Tabs */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <button 
+              onClick={() => setActiveTab('all')}
+              className={`px-6 py-2 rounded-full font-semibold transition ${
+                activeTab === 'all' 
+                  ? 'bg-purple-600 text-white' 
+                  : 'bg-white text-gray-700 hover:bg-purple-100'
+              }`}
+            >
+              전체
+            </button>
+            {aiTools.map((category, index) => (
+              <button 
+                key={index}
+                onClick={() => setActiveTab(category.category)}
+                className={`px-6 py-2 rounded-full font-semibold transition ${
+                  activeTab === category.category 
+                    ? 'bg-purple-600 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-purple-100'
+                }`}
+              >
+                {category.category}
+              </button>
+            ))}
+          </div>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {aiTools
+              .filter(category => activeTab === 'all' || activeTab === category.category)
+              .map((category, index) => {
+                const CategoryIcon = category.icon;
+                return (
+                  <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+                    <div className="flex items-center mb-4">
+                      <div className="bg-purple-100 p-3 rounded-lg mr-3">
+                        <CategoryIcon className="w-6 h-6 text-purple-600" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">{category.category}</h3>
+                    </div>
+                    <ul className="space-y-2">
+                      {category.tools.map((tool, toolIndex) => (
+                        <li key={toolIndex} className="flex items-center text-gray-600 hover:text-purple-600 transition cursor-pointer">
+                          <CheckCircle2 className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                          <span className="text-sm">{tool}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button className="mt-4 w-full bg-purple-100 text-purple-700 py-2 rounded-lg hover:bg-purple-200 transition text-sm font-semibold flex items-center justify-center">
+                      더 보기 <ArrowRight className="w-4 h-4 ml-1" />
+                    </button>
+                  </div>
+                );
+              })}
+          </div>
+
+          <div className="text-center mt-12">
+            <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition shadow-lg">
+              전체 도구 목록 보기
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Project Flow */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+            실전 프로젝트 플로우
+          </h2>
+          <p className="text-center text-gray-600 mb-12">신제품 런칭 마케팅 기획안 완성하기</p>
+          
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <div className="bg-blue-100 rounded-lg p-6 text-center w-full md:w-48">
+              <div className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Target className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-gray-900">1. 아이디어션</h4>
+              <p className="text-sm text-gray-600">ChatGPT</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-gray-400 rotate-90 md:rotate-0" />
+            
+            <div className="bg-purple-100 rounded-lg p-6 text-center w-full md:w-48">
+              <div className="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Image className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-gray-900">2. 브랜딩</h4>
+              <p className="text-sm text-gray-600">Ideogram</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-gray-400 rotate-90 md:rotate-0" />
+            
+            <div className="bg-pink-100 rounded-lg p-6 text-center w-full md:w-48">
+              <div className="bg-pink-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                <FileText className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-gray-900">3. 발표자료</h4>
+              <p className="text-sm text-gray-600">Gamma</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-gray-400 rotate-90 md:rotate-0" />
+            
+            <div className="bg-orange-100 rounded-lg p-6 text-center w-full md:w-48">
+              <div className="bg-orange-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Video className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-gray-900">4. 홍보 콘텐츠</h4>
+              <p className="text-sm text-gray-600">Designer, Suno</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-gray-400 rotate-90 md:rotate-0" />
+            
+            <div className="bg-green-100 rounded-lg p-6 text-center w-full md:w-48">
+              <div className="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Database className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="font-bold text-gray-900">5. 정리 및 공유</h4>
+              <p className="text-sm text-gray-600">Notion</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section - ADDED */}
+      <section id="gallery" className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            갤러리
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {galleryItems.map((item) => (
+              <div key={item.id} className="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center">
+                  <h3 className="text-white font-bold text-lg mb-2 text-center px-2">{item.title}</h3>
+                  <a 
+                    href={item.link} 
+                    className="inline-flex items-center bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition"
+                  >
+                    바로가기 <ArrowRight className="w-4 h-4 ml-1" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Community CTA */}
+      <section id="community" className="py-16 bg-gradient-to-br from-blue-600 to-purple-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4">
+            이제 당신의 업무를 혁신할 시간입니다
+          </h2>
+          <p className="text-center text-blue-100 mb-12 text-lg">
+            지식은 실천할 때 비로소 당신의 것이 됩니다.<br />
+            오늘 배운 것 중 단 하나라도 지금 바로 업무에 적용해보세요.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 text-center">
+              <h3 className="text-xl font-bold text-white mb-3">스터디 신청</h3>
+              <p className="text-blue-100 mb-4 text-sm">과정에 대한 실시간 학습 및 네트워킹을 위한 온보딩방 링크</p>
+              <div className="bg-white p-4 rounded-lg inline-block">
+                <div className="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500 text-xs">QR Code</span>
+                </div>
+              </div>
+              <button className="mt-4 bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition w-full">
+                바로 신청하기
+              </button>
+            </div>
+            
+            <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 text-center">
+              <h3 className="text-xl font-bold text-white mb-3">출석 체크</h3>
+              <p className="text-blue-100 mb-4 text-sm">(해당 시) 출석체크용 링크</p>
+              <div className="bg-white p-4 rounded-lg inline-block">
+                <div className="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500 text-xs">QR Code</span>
+                </div>
+              </div>
+              <button className="mt-4 bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition w-full">
+                출석하기
+              </button>
+            </div>
+            
+            <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 text-center">
+              <h3 className="text-xl font-bold text-white mb-3">과제 제출</h3>
+              <p className="text-blue-100 mb-4 text-sm">(해당 시) 과제 제출용 구글폼 링크</p>
+              <div className="bg-white p-4 rounded-lg inline-block">
+                <div className="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500 text-xs">QR Code</span>
+                </div>
+              </div>
+              <button className="mt-4 bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition w-full">
+                과제 제출하기
+              </button>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <button 
+              onClick={() => scrollToSection('modules')}
+              className="bg-white text-blue-600 px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-xl"
+            >
+              지금 바로 시작하기
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-300 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center mb-4 cursor-pointer" onClick={() => scrollToSection('hero')}>
+                <img src="/mnt/user-data/uploads/WITHCOM_AI_LOGO.png" alt="WITHCOM AI" className="h-8 brightness-200" />
+              </div>
+              <p className="text-sm">AI 시대의 스마트워크를 선도하는 스터디 플랫폼</p>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-white mb-4">스터디</h4>
+              <ul className="space-y-2 text-sm">
+                <li><button onClick={() => scrollToSection('modules')} className="hover:text-white transition">학습 과정</button></li>
+                <li><button onClick={() => scrollToSection('tools')} className="hover:text-white transition">AI 도구</button></li>
+                <li><button onClick={() => scrollToSection('about')} className="hover:text-white transition">리소스</button></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-white mb-4">커뮤니티</h4>
+              <ul className="space-y-2 text-sm">
+                <li><button onClick={() => scrollToSection('community')} className="hover:text-white transition">스터디 그룹</button></li>
+                <li><button onClick={() => scrollToSection('community')} className="hover:text-white transition">Q&A</button></li>
+                <li><button onClick={() => scrollToSection('about')} className="hover:text-white transition">블로그</button></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-white mb-4">문의</h4>
+              <ul className="space-y-2 text-sm">
+                <li><button onClick={() => scrollToSection('community')} className="hover:text-white transition">이메일 문의</button></li>
+                <li><button className="hover:text-white transition">FAQ</button></li>
+                <li><button className="hover:text-white transition">개인정보처리방침</button></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
+            <p>&copy; 2026 withcom ai. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
