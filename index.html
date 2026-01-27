@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WITHCOM AI - 스마트 워크 & 생성형 AI 실무 마스터 과정</title>
+    <title>WITHCOM AI - 스마트 워크 & 생성형 AI 실무활용 마스터 </title>
     
     <!-- React 18 & ReactDOM 18 (CDNJS 사용으로 안정성 확보) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" crossorigin="anonymous"></script>
@@ -125,7 +125,7 @@
                     icon: BookOpen, 
                     color: "bg-orange-500",
                     description: "OneNote의 전자 필기장 구조를 이해하고, PDF, 오피스 파일 등 다양한 형식의 문서를 첨부하고 필기하며 강력한 디지털 자료실을 구축합니다.",
-                    topics: ["2024년 프로젝트 전자 필기장 생성", "강의 자료 PDF 파일을 인쇄 형태로 삽입 후 펜으로 필기", "모든 필기장이 OneDrive에 자동 저장/동기화", "특정 페이지를 동료에게 공유하여 검토 및 피드백 받기"]
+                    topics: ["2026년 프로젝트 전자 필기장 생성", "강의 자료 PDF 파일을 인쇄 형태로 삽입 후 펜으로 필기", "모든 필기장이 OneDrive에 자동 저장/동기화", "특정 페이지를 동료에게 공유하여 검토 및 피드백 받기"]
                 },
                 { 
                     id: 8, 
@@ -149,7 +149,7 @@
                     icon: MessageSquare, 
                     color: "bg-cyan-500",
                     description: "ChatGPT(GPTs)와 Gemini(GEMs), NotebookLM을 활용하여 반복적인 질문에 답하는 상담 챗봇, 회의록을 정리하는 업무 봇 등 나만의 맞춤형 AI를 만듭니다.",
-                    topics: ["ChatGPT GPTs 만들기 접속", "우리 회사 신입사원을 위한 자주 묻는 질문(FAQ) 답변 봇 만들기", "Gemini GEM 만들기에서 동일한 미션 수행"]
+                    topics: ["ChatGPT GPTs 만들기 접속", "우리 회사 신입사원을 위한 자주 묻는 질문(FAQ) 답변 봇 만들기", "Gemini GEMs 만들기에서 동일한 미션 수행"]
                 },
                 { 
                     id: 11, 
@@ -157,7 +157,7 @@
                     icon: Rocket, 
                     color: "bg-violet-500",
                     description: "앞서 배운 모든 도구와 AI를 총동원하여 신제품 런칭이라는 가상의 과제에 대한 통합 마케팅 기획안을 완성합니다.",
-                    topics: ["아이디어션 (ChatGPT)", "브랜딩 (Ideogram)", "발표자료 (Gamma)", "홍보 콘텐츠 (Microsoft Designer, Suno)", "정리 및 공유 (Notion)"]
+                    topics: ["아이디어 (ChatGPT, NotebookLM, Gemini)", "브랜딩 (ChatGPT, Ideogram)", "발표자료 (Gamma, Manus, Canva, NotebookLM)", "홍보 콘텐츠 (Microsoft Designer, Suno, Vrew, Capcut)", "정리 및 공유 (Notion)"]
                 }
             ];
 
@@ -177,7 +177,7 @@
                 {
                     icon: Database,
                     title: "데이터베이스화",
-                    description: "Notion과 Google 포토/지도",
+                    description: "Notion과 OneNote, Google 포토/지도",
                     color: "text-green-500"
                 },
                 {
@@ -189,7 +189,7 @@
                 {
                     icon: Users,
                     title: "개인화",
-                    description: "나만의 맞춤형 AI 비서 (GPTs, Gems, NotebookLM)",
+                    description: "나만의 맞춤형 AI 비서 (GPTs, GEMs, NotebookLM)",
                     color: "text-orange-500"
                 }
             ];
@@ -203,13 +203,13 @@
                 { category: "코딩 도구", tools: ["Replit", "Bolt.new", "V0", "Codev"], icon: Chrome }
             ];
 
-            // 갤러리 데이터 (이미지 경로가 외부에서도 작동하는지 확인)
+            // 갤러리 데이터 (이미지 경로가 외부에서도 작동하는지 확인) 
             const galleryItems = [
-                { id: 1, title: "스마트워크 워크숍", image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600", link: "#" },
-                { id: 2, title: "스마트워크 세미나", image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600", link: "#" },
-                { id: 3, title: "경영전략 회의", image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=600", link: "#" },
-                { id: 4, title: "AI 활용 실습", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600", link: "#" },
-                { id: 5, title: "글로벌 네트워킹", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600", link: "#" }
+                { id: 1, title: "스마트워크 워크숍", image: "https://plus.unsplash.com/premium_photo-1664297709782-69a0855ba798?q=80&w=1740", link: "#" },
+                { id: 2, title: "스마트워크 세미나", image: "https://plus.unsplash.com/premium_photo-1661501010071-c369e1e57342?q=80&w=1780", link: "#" },
+                { id: 3, title: "경영전략 회의", image: "https://images.unsplash.com/photo-1758873269181-270f5b7fc6aa?q=80&w=1332", link: "#" },
+                { id: 4, title: "AI 활용 실습", image: "https://images.unsplash.com/photo-1738640679960-58d445857945?q=80&w=1171", link: "#" },
+                { id: 5, title: "글로벌 네트워킹", image: "https://images.unsplash.com/photo-1761195689615-9469b65dac01?q=80&w=1171", link: "#" }
             ];
 
             // 스크롤 함수
@@ -308,7 +308,7 @@
                             <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-sm">
                                 스마트 워크 & 생성형 AI
                                 <br className="hidden md:block" />
-                                <span className="block mt-2">실무 마스터 과정</span>
+                                <span className="block mt-2">실무활용 마스터 </span>
                             </h1>
                             <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
                                 AI 스마트 혁신 2026, 당신의 업무를 재창조하는 실습 가이드
@@ -318,7 +318,7 @@
                                     onClick={() => scrollToSection('community')}
                                     className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl transform hover:-translate-y-1"
                                 >
-                                    무료로 시작하기
+                                    시작하기
                                 </button>
                                 <button 
                                     onClick={() => scrollToSection('about')}
@@ -356,7 +356,7 @@
                                         </div>
                                         <div className="flex items-start">
                                             <div className="w-2 h-2 bg-red-400 rounded-full mt-2.5 mr-4 flex-shrink-0"></div>
-                                            <p className="text-gray-600 text-lg">아이디어 고갈 및 창의적 업무의 한계</p>
+                                            <p className="text-gray-600 text-lg">신규 아이디어 고갈 및 창의적 업무의 한계</p>
                                         </div>
                                     </div>
                                 </div>
@@ -371,7 +371,7 @@
                                     <div className="space-y-4">
                                         <div className="flex items-start">
                                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
-                                            <p className="text-gray-700 text-lg font-medium">자동화된 워크플로우로 업무 시간 50% 단축</p>
+                                            <p className="text-gray-700 text-lg font-medium">자동화된 워크플로우로 업무 시간 10배 이상 단축</p>
                                         </div>
                                         <div className="flex items-start">
                                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
@@ -379,7 +379,7 @@
                                         </div>
                                         <div className="flex items-start">
                                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
-                                            <p className="text-gray-700 text-lg font-medium">AI 비서를 활용한 창의적 콘텐츠 무한 생성</p>
+                                            <p className="text-gray-700 text-lg font-medium">AI 비서를 활용한 창의적 콘텐츠활용 업무</p>
                                         </div>
                                     </div>
                                 </div>
@@ -757,9 +757,9 @@
                                         <span className="text-xl font-bold">WITHCOM AI</span>
                                     </div>
                                     <p className="text-sm leading-relaxed mb-6">
-                                        위더스컴퓨터(주)의 미래 비전.<br/>
+                                        WITHCOM의 미래 비전.<br/>
                                         AI 시대의 스마트워크를 선도하는<br/>
-                                        실무 중심 교육 플랫폼입니다.
+                                        실무 중심 스터디 플랫폼입니다.
                                     </p>
                                 </div>
                                 
